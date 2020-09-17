@@ -41,22 +41,28 @@ class Airplane {
 */
 
 class Person {
-  constructor(attr){
-    this.name = attr.name;
-    this.age = attr.age;
+  constructor(name, age){
+    this.name = name;
+    this.age = age;
     this.stomach = [];
   }
+
   eat(food){
     if(this.stomach.length < 10){
-      this.stomach.push(food)
-    } else {
-      return this.poop()
+      this.stomach.push(food);
+    } else{
+      this.poop();
+      return 'stomach is full'
     }
     return this.stomach;
   }
 
   poop(){
     this.stomach=[];
+  }
+
+  toString(){
+    return `${this.name}, ${this.age}`;
   }
 }
 
@@ -65,16 +71,6 @@ let personOne = new Person({
   age: 27,
 });
 
-console.log(personOne.eat('Apple'));
-console.log(personOne.eat('Apple'));
-console.log(personOne.eat('Apple'));
-console.log(personOne.eat('Apple'));
-console.log(personOne.eat('Apple'));
-console.log(personOne.eat('Apple'));
-console.log(personOne.eat('Apple'));
-console.log(personOne.eat('Apple'));
-console.log(personOne.eat('Apple'));
-console.log(personOne.eat('Apple'));
 console.log(personOne.eat('Apple'));
 console.log(personOne.stomach);
 /*
@@ -92,7 +88,28 @@ console.log(personOne.stomach);
 */
 
 class Car {
+  constructor(model,milesPerGallon){
+    this.model = model;
+    this.milesPerGallon = milesPerGallon;
+    this.tank = 0;
+    this.odometer = 0;
+  }
 
+  fill(gallons){
+    return this.tank+= gallons;
+  }
+
+  drive(distance){
+    if(distance > this.tank * this.milesPerGallon){
+      this.odometer = this.tank * this.milesPerGallon;
+      this.tank = 0;
+      return `I ran out of fuel at ${distance} ${this.odometer}`
+    } else {
+      this.odometer += distance;
+      this.tank -= distance/this.milesPerGallon
+      return `Your new total distance driven is ${this.odometer} miles`
+    }
+  }
 }
 
 /*
@@ -108,7 +125,15 @@ class Car {
         + {name} and {location} of course come from the instance's own properties.
 */
 class Lambdasian {
+  constructor(attr){
+    this.name = attr.name;
+    this.age = attr.age;
+    this.location = attr.location;
+  }
 
+  speak(){
+    return `Hello my name is ${this.name}, I am from ${this.location}`;
+  }
 }
 
 /*
